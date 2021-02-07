@@ -1,9 +1,9 @@
-#Smart-Market API
+# Smart-Market API
 
-##Descrição
+## Descrição
 O Smart-Market é um aplicativo a onde você pode criar sua lista de compras e criar e adicionar pordutos nessa lista.
 
-##Tecnologias
+## Tecnologias
 - [bcryptjs](https://www.npmjs.com/package/bcryptjs)
 - [body-parser](https://www.npmjs.com/package/body-parser)
 - [express](https://expressjs.com/pt-br/)
@@ -11,6 +11,6 @@ O Smart-Market é um aplicativo a onde você pode criar sua lista de compras e c
 - [mongoose](https://mongoosejs.com/)
 - [nodemon](https://nodemon.io/)
 
-##Status do projeto
+## Status do projeto
 - Em desenvolvimento
 - [APP em desenvolvimento](https://github.com/Dms98Br/Smart_Market_App)

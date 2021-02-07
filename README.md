@@ -1,4 +1,4 @@
-<h1 align="center"><img src="src/assests/cart.png" width=40 height=40> Smart-Market API</h1>
+#Smart-Market API
 
 ##Descrição
 O Smart-Market é um aplicativo a onde você pode criar sua lista de compras e criar e adicionar pordutos nessa lista.

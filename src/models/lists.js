@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcryptjs = require('bcryptjs');
 const Schema = mongoose.Schema;
 
 const schema = new Schema({
@@ -7,6 +6,10 @@ const schema = new Schema({
     type: String,
     required: ['true', 'O nome é obrigatório'],
     trim: true
+  },
+  id_user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: ['true', 'Id do usuário é obrigatório'],
   }
 });
 

@@ -17,10 +17,12 @@ exports.create = async (data) => {
 }
 
 exports.update = async (_id, data) => {
+  console.log(_id, data.id_user);
   await list
     .findByIdAndUpdate(_id, {
       $set: {
-        nameList: data.nameList
+        nameList: data.nameList,
+        id_user: data.id_user
       }
     });
 }

@@ -3,9 +3,12 @@ const repository = require('../repositories/list-repository');
 
 exports.create = async (req, res) => {
   try {
-    const { namelist } = req.body
+    const { namelist, id_user } = req.body
+    if (id_user === undefined)
+      return res.status(400).send({ menssage: 'Id do usuário não foi encontrado' });
     if (await List.findOne({ namelist }))
       return res.status(400).send({ menssage: 'Essa lista já existe' });
+
     else
       await repository.create(req.body);
     res.status(201).send({ menssage: 'Lista criada com sucesso' });
@@ -38,6 +41,7 @@ exports.getById = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
+    console.log(req.body);
     await repository.update(req.params.id, req.body);
     res.status(200).send('Nome da lista foi atualizado')
   } catch (e) {

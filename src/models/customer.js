@@ -32,9 +32,11 @@ const schema = new Schema({
   }]
 });
 
-schema.pre('save', async function(next) {
-  const hash = await bcryptjs.hash(this.password, 10);
-  this.password = hash;
-  next();
-})
+schema.methods.generateHash = function (password) {
+  return bcryptjs.hashSync(password, bcryptjs.genSaltSync(8), null);
+}
+
+schema.methods.validPassword = function (password) {
+  return bcryptjs.compareSync(password, this.password);
+}
 module.exports = mongoose.model('consumers', schema);

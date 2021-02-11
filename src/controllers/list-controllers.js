@@ -2,16 +2,16 @@ const List = require('../models/lists');
 const repository = require('../repositories/list-repository');
 
 exports.create = async (req, res) => {
+  const list = new List(req.body)
   try {
-    const { namelist, id_user } = req.body
+    const { nameList, id_user } = req.body
     if (id_user === undefined)
       return res.status(400).send({ menssage: 'Id do usuário não foi encontrado' });
-    if (await List.findOne({ namelist }))
+    if (await List.findOne({ nameList }))
       return res.status(400).send({ menssage: 'Essa lista já existe' });
-
     else
-      await repository.create(req.body);
-    res.status(201).send({ menssage: 'Lista criada com sucesso' });
+      await list.save();
+      res.status(201).send({ menssage: 'Lista criada com sucesso' });
   } catch (e) {
     res.status(400).send({ menssage: 'Erro ao criar lista de compras' }, e);
   }
@@ -19,19 +19,16 @@ exports.create = async (req, res) => {
 
 exports.get = async (req, res) => {
   try {
-    var data = await repository.get()
-    res.status(200).send({
-      data: data
-    })
+    var list = await List.find({})
+    res.status(200).send(list)
   } catch (e) {
     res.status(400).send({ menssage: 'Erro ao retornar as lista' })
   }
 }
 
 exports.getById = async (req, res) => {
-  try {
-    var data = await repository.getById(req.params.id);
-    res.status(200).send(data);
+  try {    
+    return res.status(200).send(await List.findById(req.params.id));
   } catch (e) {
     res.status(500).send({
       menssage: 'Falha ao processar sua requisição'
@@ -41,8 +38,7 @@ exports.getById = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    console.log(req.body);
-    await repository.update(req.params.id, req.body);
+    await List.updateOne({ _id: req.params.id }, req.body);
     res.status(200).send('Nome da lista foi atualizado')
   } catch (e) {
     res.status(400).send({ menssage: 'Erro na solitação', e });
@@ -50,12 +46,8 @@ exports.update = async (req, res) => {
 }
 
 exports.deleteForever = async (req, res) => {
-  try {
-    if (! await List.findOne({ _id: req.params.id })) {
-      res.status(400).send({ menssage: 'Usuário não foi encontrado' });
-      return false
-    }
-    var data = await repository.deleteForever(req.params.id);
+  try {    
+    await List.deleteOne({ _id: req.params.id });
     res.status(200).send({ menssage: 'Lista foi deletada !' })
   } catch (e) {
     res.status(400).send({ menssage: 'Erro na solicitação' })

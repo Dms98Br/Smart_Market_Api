@@ -1,5 +1,4 @@
 const List = require('../models/lists');
-const repository = require('../repositories/list-repository');
 
 exports.create = async (req, res) => {
   const list = new List(req.body)
@@ -13,7 +12,7 @@ exports.create = async (req, res) => {
       await list.save();
       res.status(201).send({ menssage: 'Lista criada com sucesso' });
   } catch (e) {
-    res.status(400).send({ menssage: 'Erro ao criar lista de compras' }, e);
+    res.status(400).json({ error: { code: err.code, message: err.message } });
   }
 }
 
@@ -22,7 +21,7 @@ exports.get = async (req, res) => {
     var list = await List.find({})
     res.status(200).send(list)
   } catch (e) {
-    res.status(400).send({ menssage: 'Erro ao retornar as lista' })
+    res.status(400).json({ error: { code: err.code, message: err.message } });
   }
 }
 
@@ -36,12 +35,13 @@ exports.getById = async (req, res) => {
   }
 }
 
+
 exports.update = async (req, res) => {
   try {
     await List.updateOne({ _id: req.params.id }, req.body);
     res.status(200).send('Nome da lista foi atualizado')
   } catch (e) {
-    res.status(400).send({ menssage: 'Erro na solitação', e });
+    res.status(400).json({ error: { code: err.code, message: err.message } });
   }
 }
 
@@ -50,6 +50,6 @@ exports.deleteForever = async (req, res) => {
     await List.deleteOne({ _id: req.params.id });
     res.status(200).send({ menssage: 'Lista foi deletada !' })
   } catch (e) {
-    res.status(400).send({ menssage: 'Erro na solicitação' })
+    res.status(400).json({ error: { code: err.code, message: err.message } });
   }
 }

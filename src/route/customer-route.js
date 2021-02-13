@@ -1,12 +1,13 @@
 const express = require('express');
 var router = express.Router();
-const userController = require('../controllers/customer-controllers');
+const customerController = require('../controllers/customer-controllers');
+const security = require('../services/authenticate-service');
+//router.use(security.authorize);
 
-router.post('/create', userController.create);
-router.get('/', userController.get);
-router.get('/:id', userController.getById);
-router.put('/:id', userController.update);
-router.put('/updatePassword/:id', userController.updatePassword);
-router.delete('/:id', userController.deleteForever);
+router.get('/', customerController.get);
+router.get('/:id', customerController.getById);
+router.put('/:id', customerController.update);
+router.put('/updatePassword/:id', customerController.updatePassword);
+router.delete('/:id', customerController.deleteForever);
 
 module.exports = router;

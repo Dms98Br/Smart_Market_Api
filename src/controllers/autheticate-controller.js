@@ -4,10 +4,8 @@ const config = require('../configure/keyaccess')
 
 exports.authenticate = async (req, res) => {
   try {
-    //const customer = new Customer(req.body);
     const { email, password } = req.body;
-    const customer = await Customer.findOne({ email }).select('+password');
-
+    const customer = await Customer.findOne({ email }).select('+password');    
     const id = customer._id
     if (!customer)
       res.status(400).send({ menssage: 'Usuário não foi encontrado' });
@@ -22,6 +20,7 @@ exports.authenticate = async (req, res) => {
     res.status(202).send({ token: token })
 
   } catch (err) {
+    console.log(err);
     res.status(400).json({ error: { code: err.code, message: err.message } });
   }
 }

@@ -20,6 +20,6 @@ app.use('/customers', customerRoute);
 app.use('/register', registerRoute)
 app.use('/lists', listRoute);
 app.use('/product', productRoute);
-app.use('/authenticate', authRoute);
+app.use('/signin', authRoute);
 
 module.exports = app;

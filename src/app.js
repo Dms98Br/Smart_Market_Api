@@ -13,6 +13,11 @@ const app = express();
 //Conecta ao banco
 mongoose.connect(config.connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
+const connection = mongoose.connection;
+connection.on('error', () => console.log('Erro ao conectar no banco'));
+connection.on('open', () => console.log('Banco conectado'));
+
+
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 

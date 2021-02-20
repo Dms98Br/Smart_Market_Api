@@ -2,8 +2,8 @@ const app = require('./src/app');
 const http = require('http');
 const debug = require('debug');
 const { normalize } = require('path');
-//require('dotenv-safe').load();
-const port = normalizePort(process.env.port || '5000');
+require('dotenv-safe').load();
+const port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
 const server = http.createServer(app);

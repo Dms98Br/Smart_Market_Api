@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors')
 const mongoose = require('mongoose');
 const config = require('./configure/keyaccess');
 const bodyParser = require('body-parser');
@@ -9,7 +10,7 @@ const productRoute = require('./route/product-route');
 const authRoute = require('./route/authenticate-route');
 
 const app = express();
-
+app.use(cors())
 //Conecta ao banco
 mongoose.connect(config.connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 

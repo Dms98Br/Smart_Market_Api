@@ -24,12 +24,10 @@ const schema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     required: ['true', 'Id da lita é obrigatório'],
   },
-  status: [{
-    type: String,
-    required: true,
-    enum: ['true', 'false'],
-    default: 'true'
-  }],
+  status: {
+    type: Boolean,
+    default: false
+  },
 });
 
 module.exports = mongoose.model('products', schema);

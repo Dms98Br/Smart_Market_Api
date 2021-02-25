@@ -15,11 +15,11 @@ const schema = new Schema({
     type: String,
     trim: true
   },
-  typeUnity: [{
+  typeUnity: {
     type: String,
     required: ['true', 'Unidade de medida é obrigatório'],
     trim: true
-  }],
+  },
   id_list: {
     type: mongoose.Schema.Types.ObjectId,
     required: ['true', 'Id da lita é obrigatório'],
